@@ -10,6 +10,7 @@ import { ErrorState, LoadingBlock } from '../ui/AsyncState';
 import { PredictForm } from '../ml/PredictForm';
 import { ExplainabilityCard } from '../ml/ExplainabilityCard';
 import { INDIA_ADMINISTRATIVE_AREAS } from '../../data/indiaAdministrative';
+import { GRADE_BANDS } from '../../data/highGradeDeposits';
 
 const number = new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0 });
 const tonnes = (value: number | null | undefined) => value == null ? 'N/A' : value >= 1e6 ? `${(value / 1e6).toFixed(2)}M` : value >= 1e5 ? `${(value / 1e5).toFixed(2)}L` : number.format(value);
@@ -83,6 +84,12 @@ export function Dashboard() {
         <Kpi icon={<Sparkles />} label="AVERAGE GRADE" value={filteredGradeValues.length ? `${(filteredGradeValues.reduce((a, b) => a + b, 0) / filteredGradeValues.length).toFixed(2)}%` : 'Not reported'} suffix="source data limitation" />
         <Kpi icon={<BarChart3 />} label="DATA HORIZON" value={summary.data?.year_range?.length ? `FY ${summary.data.year_range[0]} — ${summary.data.year_range[summary.data.year_range.length - 1]}` : 'N/A'} suffix={`${number.format(summary.data?.training_rows ?? 0)} ML rows · ${number.format(summary.data?.synthetic_training_rows ?? 0)} augmented`} />
       </section>}
+
+      <section className="grade-priority panel">
+        <div className="panel-heading"><div><p className="eyebrow">INDIAN BUREAU OF MINES REFERENCE</p><h2>Prioritize high-grade manganese</h2></div><span className="live-tag">Mn CONTENT</span></div>
+        <div className="grade-priority-copy"><p><strong>&gt;46% Mn</strong> is the high-grade target for ferro-alloys and export; <strong>&gt;48% Mn</strong> is chemical / dioxide grade. Below <strong>10% Mn</strong>, ore is legally classified as waste and is generally left in place.</p><p className="muted">Reference bands are shown separately from the project inventory because source Grade_pct values are not reported for most inventory rows.</p></div>
+        <div className="grade-band-grid">{GRADE_BANDS.map((band) => <div className="grade-band" key={band.name} style={{ borderTopColor: band.color }}><strong>{band.name}</strong><b>{band.manganese} Mn</b><span>{band.use}</span></div>)}</div>
+      </section>
 
       <section className="split-layout">
         <div className="panel map-panel"><div className="panel-heading"><div><p className="eyebrow">GEOSPATIAL INTELLIGENCE</p><h2>Deposit distribution</h2></div><span className="live-tag">DATASET MAP</span></div><IndiaMap state={filters.state} district={filters.district} selectedDepositId={filters.selectedDepositId} /></div>

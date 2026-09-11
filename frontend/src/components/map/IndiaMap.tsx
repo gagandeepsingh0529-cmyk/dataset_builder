@@ -5,6 +5,7 @@ import { Crosshair, LocateFixed } from 'lucide-react';
 import { apiClient } from '../../api/client';
 import { useFilterStore } from '../../store/useFilterStore';
 import type { MapPoint } from '../../types/api';
+import { HIGH_GRADE_REFERENCE_DEPOSITS, gradeBandFor } from '../../data/highGradeDeposits';
 import { ErrorState, LoadingBlock } from '../ui/AsyncState';
 
 function ClickCapture({ enabled }: { enabled: boolean }) {
@@ -41,11 +42,15 @@ export function IndiaMap({ state, district, selectedDepositId }: { state: string
       {!tileError && <TileLayer attribution='&copy; CARTO' url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" eventHandlers={{ tileerror: () => setTileError(true) }} />}
       <ClickCapture enabled={predictMode} />
       <MapSelection points={points} selectedDepositId={selectedDepositId} />
+      {HIGH_GRADE_REFERENCE_DEPOSITS.map((deposit) => {
+        const band = gradeBandFor(deposit.numericGrade);
+        return <CircleMarker key={deposit.name} center={[deposit.latitude, deposit.longitude]} radius={10} pathOptions={{ color: band.color, weight: 3, fillColor: band.color, fillOpacity: 0.9 }}><Popup><div className="map-popup high-grade-popup"><strong>HIGH-GRADE REFERENCE</strong><b>{deposit.name} · {deposit.region}</b><span>Mn: {deposit.manganese} · {band.name}</span><small>{deposit.notes}</small><small>Approximate regional reference; not an inventory record.</small></div></Popup></CircleMarker>;
+      })}
       {groups.map((group) => <DepositGroup key={`${group[0].latitude}-${group[0].longitude}`} points={group} maxProduction={maxProduction} selectedDepositId={selectedDepositId} onInspect={(point) => { selectDeposit(point.deposit_id); setMapCoordinate({ lat: point.latitude, lng: point.longitude }); }} />)}
       {coordinate && <CircleMarker center={[coordinate.lat, coordinate.lng]} radius={10} pathOptions={{ color: '#fbbf24', fillColor: '#fbbf24', fillOpacity: 0.9, className: 'target-pin' }} />}
     </MapContainer>
     <button className={`map-mode ${predictMode ? 'active' : ''}`} onClick={() => setPredictMode((value) => !value)}>{predictMode ? <Crosshair size={15} /> : <LocateFixed size={15} />}{predictMode ? 'Click map to test' : 'Test feasibility on map'}</button>
-    <div className="map-legend"><span><i className="legend-dot small" /> Lower output</span><span><i className="legend-dot large" /> Higher output</span></div>
+    <div className="map-legend"><span><i className="legend-dot high-grade" /> High-grade reference</span><span><i className="legend-dot small" /> Lower output</span><span><i className="legend-dot large" /> Higher output</span></div>
     {tileError && <div className="map-fallback"><strong>Basemap unavailable</strong><span>Deposit coordinates remain available for analysis.</span></div>}
     <div className="map-note">Coordinates represent district-level centroids where exact deposit coordinates are unavailable.</div>
   </div>;
