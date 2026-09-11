@@ -7,11 +7,11 @@ export type GradeBand = {
 };
 
 export const GRADE_BANDS: GradeBand[] = [
-  { name: 'Chemical / Dioxide', manganese: '> 48%', iron: '< 4%', use: 'EMD, batteries, chemicals', color: '#fbbf24' },
-  { name: 'High Grade', manganese: '> 46%', iron: '—', use: 'Ferro-alloys, export', color: '#34d399' },
-  { name: 'Medium Grade', manganese: '35–46%', iron: '< 26%', use: 'Blast furnace feed', color: '#60a5fa' },
-  { name: 'Low Grade', manganese: '25–35%', iron: '< 35%', use: 'Limited use', color: '#a78bfa' },
-  { name: 'Sub-Grade / Waste', manganese: '10–25%', iron: '—', use: 'Often uneconomic; may remain in dumps', color: '#f97316' },
+  { name: 'Chemical / Dioxide', manganese: '> 48%', iron: '< 4%', use: 'EMD, batteries, chemicals', color: '#d97706' },
+  { name: 'High Grade', manganese: '> 46%', iron: '—', use: 'Ferro-alloys, export', color: '#94a3b8' },
+  { name: 'Medium Grade', manganese: '35–46%', iron: '< 26%', use: 'Blast furnace feed', color: '#64748b' },
+  { name: 'Low Grade', manganese: '25–35%', iron: '< 35%', use: 'Limited use', color: '#475569' },
+  { name: 'Sub-Grade / Waste', manganese: '10–25%', iron: '—', use: 'Often uneconomic; sub-grade', color: '#334155' },
 ];
 
 export const HIGH_GRADE_REFERENCE_DEPOSITS = [

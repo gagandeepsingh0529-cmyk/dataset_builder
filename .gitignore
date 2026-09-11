@@ -5,3 +5,9 @@ backend/__pycache__/
 backend/src/__pycache__/
 backend/**/*.pyc
 .venv/
+.tools
+__pycache__/
+.dockerignore
+Dockerfile
+start.bat
+start.ps1

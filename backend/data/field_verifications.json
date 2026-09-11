@@ -1,0 +1,41 @@
+[
+  {
+    "id": "VER-01",
+    "zone_id": "CZ-01",
+    "zone_name": "Barbil-Joda North Target",
+    "latitude": 21.684,
+    "longitude": 85.542,
+    "status": "Verified",
+    "geologist": "Dr. S. K. Mohanty (GSI Senior Geologist)",
+    "verification_date": "2026-02-14",
+    "field_notes": "Outcrop exposure confirmed massive psilomelane-pyrolusite boulders in lateritic cap. Portable XRF assay indicated 44.2% Mn content.",
+    "sample_id": "OD-BB-2026-04",
+    "recommendation": "Recommended for Phase-2 diamond core drilling (5 boreholes at 50m spacing)."
+  },
+  {
+    "id": "VER-02",
+    "zone_id": "CZ-02",
+    "zone_name": "Bharveli East Extension",
+    "latitude": 21.841,
+    "longitude": 80.225,
+    "status": "Requires Further Investigation",
+    "geologist": "R. K. Verma (Exploration Lead, MOIL)",
+    "verification_date": "2026-02-28",
+    "field_notes": "Gonditic quartzite beds exposed. Surface braunite staining observed, but thick soil cover requires geophysical resistivity survey.",
+    "sample_id": "MP-BH-2026-11",
+    "recommendation": "Conduct ground magnetic and resistivity profiling along grid lines."
+  },
+  {
+    "id": "VER-03",
+    "zone_id": "CZ-03",
+    "zone_name": "Dongri Buzurg South Ridge",
+    "latitude": 21.189,
+    "longitude": 79.682,
+    "status": "Pending Verification",
+    "geologist": "Unassigned",
+    "verification_date": null,
+    "field_notes": "Awaiting field visit scheduled for Q2 2026.",
+    "sample_id": null,
+    "recommendation": "Reconnaissance geological mapping pending."
+  }
+]
