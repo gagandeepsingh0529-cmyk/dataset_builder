@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import {
   Activity,
@@ -41,10 +41,10 @@ export function ExplorationReportModal({
     reportMutation.mutate(id);
   };
 
-  // Generate on first mount
-  useState(() => {
+  // Generate on mount or zone change
+  useEffect(() => {
     reportMutation.mutate(initialZoneId);
-  });
+  }, [initialZoneId]);
 
   const report = reportMutation.data;
 
